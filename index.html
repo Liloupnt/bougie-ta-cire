@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bougie Ta Cire</title>
+<style>
+
+:root{
+--beige:#f6efe7;
+--violet:#5b2c6f;
+--rose:#f6dfe8;
+}
+
+body{
+font-family: 'Segoe UI', sans-serif;
+margin:0;
+background:var(--beige);
+color:#333;
+}
+
+header{
+background:white;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo img{
+height:70px;
+}
+
+nav a{
+margin-left:20px;
+text-decoration:none;
+color:var(--violet);
+font-weight:600;
+cursor:pointer;
+}
+
+.hero{
+padding:60px 20px;
+text-align:center;
+background:linear-gradient(135deg,var(--rose),var(--beige));
+}
+
+.hero h1{
+font-size:40px;
+color:var(--violet);
+}
+
+.hero p{
+font-size:18px;
+max-width:700px;
+margin:auto;
+}
+
+.section{
+padding:60px 10%;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+padding:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+transition:0.2s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+.price{
+color:var(--violet);
+font-weight:bold;
+}
+
+button{
+margin-top:10px;
+padding:10px 14px;
+border:none;
+background:var(--violet);
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.reviews{
+background:var(--rose);
+padding:40px;
+border-radius:12px;
+}
+
+.review{
+background:white;
+padding:15px;
+border-radius:8px;
+margin-top:10px;
+}
+
+textarea,input{
+width:100%;
+padding:10px;
+margin-top:8px;
+border-radius:6px;
+border:1px solid #ddd;
+}
+
+footer{
+margin-top:60px;
+background:var(--violet);
+color:white;
+padding:30px;
+text-align:center;
+}
+
+.hidden{display:none}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="logo.png" alt="Bougie Ta Cire Logo">
+<strong>Bougie Ta Cire</strong>
+</div>
+
+<nav>
+<a onclick="showPage('home')">Accueil</a>
+<a onclick="showPage('shop')">Nos Bougies</a>
+<a onclick="showPage('about')">Qui sommes-nous</a>
+<a onclick="showPage('reviews')">Avis</a>
+</nav>
+
+</header>
+
+<!-- ACCUEIL -->
+<section id="home" class="page">
+
+<div class="hero">
+<h1>Bougies artisanales qui illuminent votre intérieur</h1>
+
+<p>
+Bougie Ta Cire est une marque indépendante créée avec passion 🕯️. 
+Chaque bougie est fabriquée artisanalement pour apporter une ambiance chaleureuse et unique à votre intérieur.
+
+Nous proposons également des <strong>commandes personnalisées</strong> pour vos événements, cadeaux ou envies spéciales. 
+Une idée ? Une forme ? Un parfum ? Nous pouvons créer la bougie parfaite pour vous.
+</p>
+
+</div>
+
+</section>
+
+<!-- BOUTIQUE -->
+<section id="shop" class="page hidden section">
+
+<h2>Nos Bougies</h2>
+<p>Découvrez nos créations. Vous pouvez ajouter autant de bougies que vous voulez en copiant une carte produit.</p>
+
+<div class="products">
+
+<!-- PRODUIT 1 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1603006905393-c4b2b6cfd0b8">
+<h3>Bougie Vanille</h3>
+<p>Une bougie douce et chaleureuse au parfum de vanille.</p>
+<p class="price">12€</p>
+<button>Commander</button>
+</div>
+
+<!-- PRODUIT 2 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1608181831718-3d5b7a1a996a">
+<h3>Bougie Lavande</h3>
+<p>Une ambiance relaxante et florale.</p>
+<p class="price">14€</p>
+<button>Commander</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- QUI SOMMES NOUS -->
+<section id="about" class="page hidden section">
+
+<h2>Qui sommes-nous ?</h2>
+
+<p>
+Bougie Ta Cire est une boutique indépendante spécialisée dans la création de bougies artisanales.
+
+Chaque bougie est imaginée, coulée et finalisée à la main avec soin. Notre objectif est simple : proposer des bougies originales, esthétiques et de qualité.
+
+Nous croyons dans l'artisanat, la créativité et l'authenticité. C'est pour cela que chaque création est unique.
+
+Nous proposons également des bougies personnalisées pour :
+</p>
+
+<ul>
+<li>anniversaires</li>
+<li>cadeaux</li>
+<li>événements</li>
+<li>décoration</li>
+</ul>
+
+<p>
+Chaque commande est préparée avec passion pour offrir une bougie qui vous ressemble.
+</p>
+
+</section>
+
+<!-- AVIS -->
+<section id="reviews" class="page hidden section">
+
+<h2>Avis clients</h2>
+
+<div class="reviews">
+
+<div class="review">⭐️⭐️⭐️⭐️⭐️ Très belle bougie, parfum incroyable !</div>
+
+</div>
+
+<h3>Laisser un avis</h3>
+
+<input placeholder="Votre prénom">
+<textarea placeholder="Votre avis..."></textarea>
+<button>Publier</button>
+
+</section>
+
+<footer>
+
+<p><strong>Bougie Ta Cire</strong></p>
+
+<p>
+📞 07 68 22 63 16
+<br>
+📧 
+<br>
+Instagram : @bouge_ta_cire
+</p>
+
+<p>© 2026 Bougie Ta Cire</p>
+
+</footer>
+
+<script>
+
+function showPage(page){
+
+const pages=document.querySelectorAll('.page');
+pages.forEach(p=>p.classList.add('hidden'));
+
+document.getElementById(page).classList.remove('hidden');
+
+window.scrollTo(0,0);
+
+}
+
+</script>
+
+</body>
+</html>
