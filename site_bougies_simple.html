@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bougie Ta Cire — Bougies artisanales</title>
+  <style>
+    :root{
+      --beige:#f7efe7;
+      --beige-2:#fffaf6;
+      --violet:#5d2f73;
+      --violet-2:#7b4a91;
+      --rose:#f5dfe8;
+      --rose-2:#fff2f6;
+      --texte:#332c31;
+      --blanc:#ffffff;
+      --ombre:0 12px 30px rgba(93,47,115,0.10);
+      --rayon:22px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Segoe UI, Arial, sans-serif;
+      color:var(--texte);
+      background:linear-gradient(180deg,var(--beige-2),var(--beige));
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    button,input,textarea,select{font:inherit}
+
+    .topbar{
+      background:var(--violet);
+      color:white;
+      text-align:center;
+      padding:10px 16px;
+      font-size:14px;
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(255,250,246,0.95);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(93,47,115,0.08);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:16px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .brand-badge{
+      width:62px;
+      height:62px;
+      border-radius:18px;
+      background:white;
+      overflow:hidden;
+      border:1px solid rgba(93,47,115,0.08);
+      box-shadow:var(--ombre);
+    }
+
+    .brand-badge img{width:100%;height:100%;object-fit:cover}
+
+    .brand strong{
+      display:block;
+      font-size:22px;
+      color:var(--violet);
+    }
+
+    .brand span{
+      font-size:14px;
+      color:#6a5c67;
+    }
+
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .nav-links a,
+    .nav-links button{
+      border:none;
+      background:transparent;
+      color:var(--violet);
+      border-radius:999px;
+      padding:10px 14px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .nav-links a:hover,
+    .nav-links button:hover{background:rgba(93,47,115,0.08)}
+
+    .nav-cart{
+      background:var(--violet) !important;
+      color:white !important;
+    }
+
+    .cart-count{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:22px;
+      height:22px;
+      padding:0 6px;
+      margin-left:8px;
+      border-radius:999px;
+      background:var(--rose);
+      color:var(--violet);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .hero{padding:58px 0 34px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:26px;
+      align-items:center;
+    }
+
+    .card,
+    .hero-card,
+    .panel,
+    .product-card,
+    .contact-card,
+    .faq-item,
+    .cart-box,
+    .checkout-box,
+    .review-card{
+      background:rgba(255,255,255,0.88);
+      border:1px solid rgba(93,47,115,0.08);
+      border-radius:var(--rayon);
+      box-shadow:var(--ombre);
+    }
+
+    .hero-card{
+      padding:38px;
+      background:linear-gradient(145deg,var(--rose-2),var(--blanc) 55%, var(--beige));
+    }
+
+    .hero-visual{
+      min-height:470px;
+      color:white;
+      background:linear-gradient(160deg,var(--violet),var(--violet-2));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-visual::before,
+    .hero-visual::after{
+      content:"";
+      position:absolute;
+      border-radius:999px;
+      background:rgba(255,255,255,0.10);
+    }
+
+    .hero-visual::before{width:220px;height:220px;top:-40px;right:-40px}
+    .hero-visual::after{width:160px;height:160px;bottom:-30px;left:-30px}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(93,47,115,0.10);
+      color:var(--violet);
+      font-size:14px;
+      font-weight:800;
+      margin-bottom:18px;
+    }
+
+    h1{
+      margin:0 0 14px;
+      color:var(--violet);
+      font-size:clamp(34px, 5vw, 60px);
+      line-height:1.03;
+    }
+
+    .lead{
+      margin:0 0 26px;
+      line-height:1.75;
+      font-size:18px;
+      color:#5a4f57;
+    }
+
+    .actions{display:flex;flex-wrap:wrap;gap:12px}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border:none;
+      border-radius:999px;
+      padding:14px 20px;
+      cursor:pointer;
+      font-weight:800;
+      transition:transform .18s ease;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--violet);color:white}
+    .btn-secondary{background:white;color:var(--violet);border:1px solid rgba(93,47,115,0.16)}
+    .btn-soft{background:var(--rose);color:var(--violet)}
+    .btn-full{width:100%}
+
+    .visual-wrap{
+      padding:28px;
+      position:relative;
+      z-index:1;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .visual-logo{
+      width:126px;
+      height:126px;
+      border-radius:26px;
+      background:white;
+      padding:10px;
+      margin:0 auto 18px;
+      box-shadow:0 12px 24px rgba(0,0,0,0.14);
+      overflow:hidden;
+    }
+
+    .visual-wrap h2{
+      margin:0 0 10px;
+      text-align:center;
+      font-size:30px;
+    }
+
+    .visual-wrap p{
+      margin:0 auto 22px;
+      text-align:center;
+      max-width:420px;
+      line-height:1.7;
+      color:rgba(255,255,255,0.88);
+    }
+
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .stat{
+      text-align:center;
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.10);
+    }
+    .stat strong{display:block;font-size:24px;margin-bottom:6px}
+
+    section{padding:28px 0}
+
+    .section-head{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:end;
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:34px;
+      color:var(--violet);
+    }
+
+    .section-head p,
+    .muted,
+    .panel p,
+    .faq-item p,
+    .contact-card p,
+    .review-card p{
+      margin:8px 0 0;
+      line-height:1.75;
+      color:#5f545c;
+    }
+
+    .grid-3,
+    .two-col,
+    .contact-grid,
+    .cart-layout,
+    .review-layout{
+      display:grid;
+      gap:20px;
+    }
+
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .two-col,.contact-grid,.cart-layout,.review-layout{grid-template-columns:1fr 1fr}
+
+    .panel,.contact-card,.cart-box,.checkout-box,.review-card{padding:24px}
+    .info-card{padding:24px}
+    .info-card h3,.panel h3,.contact-card h3,.cart-box h3,.checkout-box h3,.review-card h3,.faq-item h3{margin:0 0 10px;color:var(--violet)}
+
+    .shop-controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .search-wrap{flex:1 1 320px}
+    .filter-wrap{width:min(220px,100%)}
+
+    .input,.textarea,select{
+      width:100%;
+      padding:14px 15px;
+      border-radius:14px;
+      border:1px solid rgba(93,47,115,0.14);
+      background:white;
+      outline:none;
+      color:var(--texte);
+    }
+
+    .input:focus,.textarea:focus,select:focus{
+      border-color:var(--violet);
+      box-shadow:0 0 0 4px rgba(93,47,115,0.08);
+    }
+
+    .textarea{min-height:130px;resize:vertical}
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:20px;
+    }
+
+    .product-card{overflow:hidden;display:flex;flex-direction:column}
+
+    .gallery{
+      position:relative;
+      aspect-ratio:1/1;
+      background:linear-gradient(145deg,var(--rose),var(--beige));
+      overflow:hidden;
+    }
+
+    .gallery img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .gallery-controls{
+      position:absolute;
+      inset:auto 12px 12px 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+
+    .gallery-btn{
+      border:none;
+      width:36px;
+      height:36px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.92);
+      color:var(--violet);
+      cursor:pointer;
+      font-weight:800;
+      box-shadow:0 6px 14px rgba(0,0,0,0.10);
+    }
+
+    .gallery-dots{
+      display:flex;
+      gap:6px;
+      margin-left:auto;
+    }
+
+    .gallery-dots span{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.60);
+      border:1px solid rgba(93,47,115,0.14);
+    }
+
+    .gallery-dots span.active{background:var(--violet)}
+
+    .product-body{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      height:100%;
+    }
+
+    .product-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .product-top h3{margin:0;color:var(--violet)}
+
+    .price{
+      font-size:22px;
+      font-weight:900;
+      color:var(--violet);
+      white-space:nowrap;
+    }
+
+    .tag{
+      display:inline-flex;
+      width:max-content;
+      padding:7px 11px;
+      border-radius:999px;
+      background:var(--rose-2);
+      color:var(--violet);
+      border:1px solid rgba(93,47,115,0.08);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .product-actions{display:flex;gap:10px;margin-top:auto}
+    .product-actions .btn{flex:1}
+
+    .template-box,.notice,.cart-note{
+      padding:18px;
+      border-radius:18px;
+      line-height:1.75;
+      border:1px dashed rgba(93,47,115,0.22);
+      background:linear-gradient(135deg,var(--rose-2),var(--beige));
+      color:#5f525b;
+    }
+
+    .review-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:18px}
+    .stars{color:#d5963a;font-size:18px;margin-bottom:10px}
+    .review-meta{margin-top:12px;font-size:14px;color:#7b6976;font-weight:700}
+
+    .cart-items{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+    .cart-item{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(93,47,115,0.08);
+      background:var(--beige-2);
+    }
+
+    .cart-item strong{color:var(--violet)}
+    .cart-item small{display:block;color:#7d6a76;margin-top:4px}
+    .cart-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+
+    .qty-btn,.remove-btn{
+      border:none;
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:800;
+    }
+
+    .qty-btn{background:white;color:var(--violet);border:1px solid rgba(93,47,115,0.14)}
+    .remove-btn{background:#fff0f4;color:#a54266}
+
+    .summary{display:grid;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(93,47,115,0.10)}
+    .summary-row{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .summary-row.total{font-size:22px;color:var(--violet);font-weight:900}
+
+    .faq-list{display:grid;gap:14px}
+    .faq-item{padding:20px}
+
+    footer{
+      margin-top:24px;
+      padding:38px 0 50px;
+      background:linear-gradient(180deg,var(--violet),#4d2561);
+      color:white;
+    }
+
+    .footer-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+    .footer-grid h3{margin:0 0 10px}
+    .footer-grid p{margin:0;line-height:1.8;color:rgba(255,255,255,0.88)}
+    .footer-links{display:grid;gap:10px}
+    .footer-links a{color:white}
+
+    @media (max-width: 980px){
+      .hero-grid,.grid-3,.two-col,.contact-grid,.cart-layout,.review-layout,.footer-grid{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(3,1fr)}
+    }
+
+    @media (max-width: 720px){
+      .nav{flex-direction:column;align-items:flex-start}
+      .nav-links{justify-content:flex-start}
+      .hero-card{padding:28px}
+      .stats{grid-template-columns:1fr}
+      .product-actions{flex-direction:column}
+      .section-head h2{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Bougie Ta Cire • Boutique indépendante • Bougies artisanales & créations personnalisées</div>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge">
+          <img src="Liceria &amp; Co..png" alt="Logo Bougie Ta Cire">
+        </div>
+        <div>
+          <strong>Bougie Ta Cire</strong>
+          <span>Créateur indépendant de bougies artisanales</span>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#bougies">Nos bougies</a>
+        <a href="#surmesure">Personnalisation</a>
+        <a href="#qui-sommes-nous">Qui sommes-nous</a>
+        <a href="#avis">Avis</a>
+        <a href="#contact">Contact</a>
+        <button class="nav-cart" onclick="document.getElementById('panier').scrollIntoView({behavior:'smooth'})">
+          Panier <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="pill">✨ Jeune marque • Fait main • Personnalisable sur demande</div>
+          <h1>Des bougies artisanales pleines de douceur, de style et de personnalité.</h1>
+          <p class="lead">
+            Chez <strong>Bougie Ta Cire</strong>, chaque création est imaginée avec passion dans un univers doux, moderne et chaleureux. Marque indépendante, fabrication artisanale, coloris personnalisables et créations sur demande : ici, chaque bougie a sa petite touche unique.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#bougies">Voir la boutique</a>
+            <a class="btn btn-secondary" href="#surmesure">Faire une demande personnalisée</a>
+          </div>
+        </div>
+
+        <div class="hero-card hero-visual">
+          <div class="visual-wrap">
+            <div class="visual-logo">
+              <img src="Liceria &amp; Co..png" alt="Logo Bougie Ta Cire">
+            </div>
+            <h2>Bougie Ta Cire</h2>
+            <p>Une boutique indépendante où tout est réalisé artisanalement avec soin, créativité et envie de faire plaisir.</p>
+            <div class="stats">
+              <div class="stat"><strong>100%</strong><span>artisanal</span></div>
+              <div class="stat"><strong>4</strong><span>modèles déjà ajoutés</span></div>
+              <div class="stat"><strong>Sur demande</strong><span>couleurs & styles</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container grid-3">
+        <div class="card info-card">
+          <h3>Univers soigné</h3>
+          <p>Une image de marque beige, violette et rose clair pour un rendu doux, pro et cohérent.</p>
+        </div>
+        <div class="card info-card">
+          <h3>Ajout illimité</h3>
+          <p>Le site est prévu pour ajouter autant de bougies que vous voulez, simplement en complétant la liste des produits.</p>
+        </div>
+        <div class="card info-card">
+          <h3>Commande facile</h3>
+          <p>Panier, contact direct et demande personnalisée déjà prêts pour recevoir les premières commandes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bougies">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Nos bougies</h2>
+            <p>Découvre les modèles disponibles. Les fiches produits affichent les photos, les variantes et les prix, avec ajout au panier en un clic.</p>
+          </div>
+        </div>
+
+        <div class="shop-controls">
+          <div class="search-wrap">
+            <input id="searchInput" class="input" type="text" placeholder="Rechercher une bougie, un style, un modèle..." oninput="renderProducts()">
+          </div>
+          <div class="filter-wrap">
+            <select id="filterInput" onchange="renderProducts()">
+              <option value="all">Toutes les catégories</option>
+              <option value="pâques">Collection Pâques</option>
+              <option value="animaux">Animaux</option>
+              <option value="oeufs">Œufs</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="productsGrid" class="products"></div>
+
+        <div class="template-box" style="margin-top:20px">
+          <strong>Ajouter d'autres produits plus tard :</strong><br>
+          Le site est prêt pour accueillir autant de bougies que souhaité. Il suffit d'ajouter un nouvel objet dans le tableau <strong>products</strong> du code avec le nom, le prix, la description, la catégorie et les images.
+        </div>
+      </div>
+    </section>
+
+    <section id="surmesure">
+      <div class="container two-col">
+        <div class="panel">
+          <h3>Commande personnalisée</h3>
+          <p>
+            Tu veux une couleur précise, un modèle particulier, une quantité spéciale ou une création pour un événement ? Bougie Ta Cire propose des commandes personnalisables sur demande.
+          </p>
+          <div class="notice" style="margin-top:16px">
+            Parfait pour : cadeaux, anniversaires, baptêmes, petites séries, décoration de table, événements et demandes sur thème.
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Envoyer une demande</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+            <input id="customName" class="input" placeholder="Votre prénom / nom">
+            <input id="customContact" class="input" placeholder="Téléphone">
+          </div>
+          <textarea id="customMessage" class="textarea" style="margin-top:14px" placeholder="Décrivez votre demande : couleur, modèle, quantité, occasion, date souhaitée..."></textarea>
+          <div class="actions" style="margin-top:14px">
+            <a class="btn btn-primary" href="https://www.instagram.com/bouge_ta_cire" target="_blank" rel="noopener">Commander sur Instagram</a>
+            <a class="btn btn-soft" href="tel:0768226316">Appeler la boutique</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="qui-sommes-nous">
+      <div class="container two-col">
+        <div class="panel">
+          <h3>Qui sommes-nous ?</h3>
+          <p>
+            <strong>Bougie Ta Cire</strong>, c'est une boutique indépendante spécialisée dans la création de bougies artisanales. Chaque pièce est réalisée à la main avec soin, dans un univers doux, créatif et chaleureux.
+          </p>
+          <p>
+            Notre envie : proposer des bougies originales, jolies et personnalisables, qui apportent une vraie touche déco et une belle idée cadeau.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>Notre façon de créer</h3>
+          <p>
+            Ici, tout est fait artisanalement. Nous prenons le temps de créer des bougies soignées, avec plusieurs coloris possibles et parfois plusieurs modèles pour une même création.
+          </p>
+          <div class="notice" style="margin-top:16px">
+            Boutique indépendante • Fabrication artisanale • Coloris sur demande • Créations personnalisables
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="avis">
+      <div class="container review-layout">
+        <div class="review-card">
+          <h3>Laisser un avis</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+            <input id="reviewName" class="input" placeholder="Votre prénom">
+            <select id="reviewStars">
+              <option value="5">5 étoiles</option>
+              <option value="4">4 étoiles</option>
+              <option value="3">3 étoiles</option>
+              <option value="2">2 étoiles</option>
+              <option value="1">1 étoile</option>
+            </select>
+          </div>
+          <textarea id="reviewText" class="textarea" style="margin-top:14px" placeholder="Votre avis sur la qualité, le design, la personnalisation..."></textarea>
+          <div class="actions" style="margin-top:14px">
+            <button class="btn btn-primary" onclick="addReview()">Publier mon avis</button>
+            <button class="btn btn-secondary" onclick="resetReviews()">Réinitialiser</button>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <h3>Avis clients</h3>
+          <p>Les avis s'enregistrent directement dans le navigateur pour donner une boutique plus vivante et rassurante.</p>
+          <div id="reviewsList" class="review-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panier">
+      <div class="container cart-layout">
+        <div class="cart-box">
+          <h3>Panier</h3>
+          <p class="muted">Ajoute les créations qui te plaisent puis finalise ta demande de commande.</p>
+          <div id="cartItems" class="cart-items"></div>
+          <div class="summary">
+            <div class="summary-row"><span>Sous-total</span><strong id="subtotal">0€</strong></div>
+            <div class="summary-row"><span>Préparation artisanale</span><strong>Incluse</strong></div>
+            <div class="summary-row total"><span>Total</span><strong id="total">0€</strong></div>
+          </div>
+          <div class="cart-note" style="margin-top:16px">
+            Cette version permet déjà de préparer les commandes. Pour un paiement en ligne réel, il faudra ensuite connecter un service comme Stripe ou PayPal.
+          </div>
+        </div>
+
+        <div class="checkout-box">
+          <h3>Finaliser la commande</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+            <input id="checkoutName" class="input" placeholder="Nom complet">
+            <input id="checkoutPhone" class="input" placeholder="Téléphone">
+          </div>
+          <textarea id="checkoutNote" class="textarea" style="margin-top:14px" placeholder="Message complémentaire : coloris souhaités, quantité, date, demande spéciale..."></textarea>
+          <div class="actions" style="margin-top:14px">
+            <a class="btn btn-primary btn-full" href="https://www.instagram.com/bouge_ta_cire" target="_blank" rel="noopener">Commander via Instagram</a>
+            <a class="btn btn-secondary btn-full" href="tel:0768226316">Commander par téléphone</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Questions fréquentes</h2>
+            <p>Quelques réponses simples pour rassurer les visiteurs et rendre le site encore plus professionnel.</p>
+          </div>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>Les coloris sont-ils personnalisables ?</h3>
+            <p>Oui, selon les modèles, plusieurs coloris sont possibles ou disponibles sur demande.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Comment commander ?</h3>
+            <p>Tu peux ajouter tes bougies au panier, puis contacter la boutique directement par Instagram ou téléphone pour finaliser la commande.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Les bougies sont-elles faites à la main ?</h3>
+            <p>Oui, Bougie Ta Cire est une boutique indépendante et chaque création est réalisée artisanalement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <h3>Contact</h3>
+          <p><strong>Téléphone :</strong> 07 68 22 63 16</p>
+          <p><strong>Instagram :</strong> @bouge_ta_cire</p>
+          <div class="actions" style="margin-top:16px">
+            <a class="btn btn-primary" href="tel:0768226316">Appeler</a>
+            <a class="btn btn-soft" href="https://www.instagram.com/bouge_ta_cire" target="_blank" rel="noopener">Voir Instagram</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Infos boutique</h3>
+          <p>Boutique indépendante de bougies artisanales, créations sur demande, collection douce et colorée, parfaite pour offrir ou décorer.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h3>Bougie Ta Cire</h3>
+        <p>Créations artisanales, coloris personnalisables et petites collections pleines de douceur.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#bougies">Nos bougies</a>
+        <a href="#qui-sommes-nous">Qui sommes-nous</a>
+        <a href="#avis">Avis</a>
+        <a href="tel:0768226316">07 68 22 63 16</a>
+        <a href="https://www.instagram.com/bouge_ta_cire" target="_blank" rel="noopener">@bouge_ta_cire</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: "Lapin dans l'oeuf",
+        price: 8,
+        category: "pâques animaux",
+        description: "Toutes les couleurs sont possibles.",
+        images: ["IMG_6612.jpg", "IMG_6250.jpg"]
+      },
+      {
+        id: 2,
+        name: "Petit poussin",
+        price: 7,
+        category: "pâques animaux",
+        description: "2 modèles sont possibles : 1 debout et 1 penché vers l'avant.",
+        images: ["IMG_6208.jpg"]
+      },
+      {
+        id: 3,
+        name: "Oeuf fleuri",
+        price: 8,
+        category: "pâques oeufs",
+        description: "Tous les coloris sont disponibles sur demande.",
+        images: ["IMG_7004.jpg", "IMG_7003.jpg"]
+      },
+      {
+        id: 4,
+        name: "Oeuf lapin",
+        price: 8,
+        category: "pâques oeufs",
+        description: "Tous les coloris sont disponibles sur demande. Deux modèles sont possibles : oreilles droites ou penchées.",
+        images: ["IMG_7003.jpg", "IMG_6624.jpg"]
+      }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('btc_cart') || '[]');
+    let reviews = JSON.parse(localStorage.getItem('btc_reviews') || 'null') || [
+      { name: 'Camille', stars: 5, text: 'Très jolies créations, rendu super mignon et qualité au top.' },
+      { name: 'Lina', stars: 5, text: 'Les couleurs sont magnifiques et la personnalisation est vraiment un plus.' }
+    ];
+
+    function euros(value){
+      return value.toFixed(2).replace('.00','') + '€';
+    }
+
+    function escapeHtml(text){
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function renderProducts(){
+      const grid = document.getElementById('productsGrid');
+      const search = document.getElementById('searchInput').value.trim().toLowerCase();
+      const filter = document.getElementById('filterInput').value;
+
+      const filtered = products.filter(product => {
+        const matchesSearch = !search || (product.name + ' ' + product.description + ' ' + product.category).toLowerCase().includes(search);
+        const matchesFilter = filter === 'all' || product.category.includes(filter);
+        return matchesSearch && matchesFilter;
+      });
+
+      if(!filtered.length){
+        grid.innerHTML = '<div class="template-box">Aucun produit ne correspond à votre recherche pour le moment.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(product => `
+        <article class="product-card">
+          <div class="gallery">
+            <img id="product-image-${product.id}" src="${product.images[0]}" alt="${escapeHtml(product.name)}">
+            ${product.images.length > 1 ? `
+            <div class="gallery-controls">
+              <button class="gallery-btn" onclick="changeImage(${product.id}, -1)">‹</button>
+              <div class="gallery-dots" id="gallery-dots-${product.id}">
+                ${product.images.map((_, index) => `<span class="${index===0 ? 'active' : ''}"></span>`).join('')}
+              </div>
+              <button class="gallery-btn" onclick="changeImage(${product.id}, 1)">›</button>
+            </div>` : ''}
+          </div>
+          <div class="product-body">
+            <span class="tag">Collection Pâques</span>
+            <div class="product-top">
+              <h3>${escapeHtml(product.name)}</h3>
+              <div class="price">${euros(product.price)}</div>
+            </div>
+            <p>${escapeHtml(product.description)}</p>
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="addToCart(${product.id})">Ajouter au panier</button>
+              <a class="btn btn-secondary" href="https://www.instagram.com/bouge_ta_cire" target="_blank" rel="noopener">Commander</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function changeImage(productId, direction){
+      const product = products.find(p => p.id === productId);
+      if(!product || product.images.length < 2) return;
+      product.currentImage = typeof product.currentImage === 'number' ? product.currentImage : 0;
+      product.currentImage = (product.currentImage + direction + product.images.length) % product.images.length;
+      document.getElementById(`product-image-${productId}`).src = product.images[product.currentImage];
+      const dots = document.querySelectorAll(`#gallery-dots-${productId} span`);
+      dots.forEach((dot, index) => dot.classList.toggle('active', index === product.currentImage));
+    }
+
+    function saveCart(){
+      localStorage.setItem('btc_cart', JSON.stringify(cart));
+    }
+
+    function addToCart(productId){
+      const item = cart.find(p => p.id === productId);
+      if(item){
+        item.quantity += 1;
+      } else {
+        const product = products.find(p => p.id === productId);
+        cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
+      }
+      saveCart();
+      renderCart();
+    }
+
+    function updateQuantity(productId, delta){
+      const item = cart.find(p => p.id === productId);
+      if(!item) return;
+      item.quantity += delta;
+      if(item.quantity <= 0){
+        cart = cart.filter(p => p.id !== productId);
+      }
+      saveCart();
+      renderCart();
+    }
+
+    function removeItem(productId){
+      cart = cart.filter(p => p.id !== productId);
+      saveCart();
+      renderCart();
+    }
+
+    function clearCart(){
+      cart = [];
+      saveCart();
+      renderCart();
+    }
+
+    function renderCart(){
+      const cartItems = document.getElementById('cartItems');
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      document.getElementById('cartCount').textContent = count;
+      document.getElementById('subtotal').textContent = euros(total);
+      document.getElementById('total').textContent = euros(total);
+
+      if(!cart.length){
+        cartItems.innerHTML = '<div class="template-box">Votre panier est vide pour le moment.</div>';
+        return;
+      }
+
+      cartItems.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div>
+            <strong>${escapeHtml(item.name)}</strong>
+            <small>${euros(item.price)} l'unité</small>
+          </div>
+          <div class="cart-actions">
+            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+            <strong>${item.quantity}</strong>
+            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+            <button class="remove-btn" onclick="removeItem(${item.id})">Supprimer</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function saveReviews(){
+      localStorage.setItem('btc_reviews', JSON.stringify(reviews));
+    }
+
+    function renderReviews(){
+      const list = document.getElementById('reviewsList');
+      list.innerHTML = reviews.map(review => `
+        <div class="review-card">
+          <div class="stars">${'★'.repeat(review.stars)}${'☆'.repeat(5 - review.stars)}</div>
+          <p>${escapeHtml(review.text)}</p>
+          <div class="review-meta">${escapeHtml(review.name)}</div>
+        </div>
+      `).join('');
+    }
+
+    function addReview(){
+      const name = document.getElementById('reviewName').value.trim();
+      const stars = Number(document.getElementById('reviewStars').value);
+      const text = document.getElementById('reviewText').value.trim();
+      if(!name || !text){
+        alert('Merci de remplir votre prénom et votre avis.');
+        return;
+      }
+      reviews.unshift({ name, stars, text });
+      saveReviews();
+      renderReviews();
+      document.getElementById('reviewName').value = '';
+      document.getElementById('reviewText').value = '';
+      document.getElementById('reviewStars').value = '5';
+    }
+
+    function resetReviews(){
+      localStorage.removeItem('btc_reviews');
+      reviews = [
+        { name: 'Camille', stars: 5, text: 'Très jolies créations, rendu super mignon et qualité au top.' },
+        { name: 'Lina', stars: 5, text: 'Les couleurs sont magnifiques et la personnalisation est vraiment un plus.' }
+      ];
+      renderReviews();
+    }
+
+    renderProducts();
+    renderCart();
+    renderReviews();
+  </script>
+</body>
+</html>
